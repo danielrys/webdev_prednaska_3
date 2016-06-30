@@ -5,12 +5,13 @@ app.constant("APP_CONFIG", {
     defaultState: "/menu/home",
 
     // API config
-    apiUrl: "example.com/api/v1/",
+    apiKey: "4aa883f95999ec813b8bfaf319f3972b",
+    apiUrl: "api.themoviedb.org/3/",
     apiEndpoints: {
-        exampleApiEndpoint: "endpoint/",
+        popular: "movie/popular",
     },
 
     getApiUrl: function (endpoint){
-        return "http://" + this.apiUrl + this.apiEndpoints[endpoint];
+        return "http://" + this.apiUrl + this.apiEndpoints[endpoint] + "?api_key="+ this.apiKey;
     },
 });

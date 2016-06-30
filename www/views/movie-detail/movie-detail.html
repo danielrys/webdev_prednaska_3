@@ -1,0 +1,18 @@
+<ion-view title="{{movie.title}}" id="view-movie-detail">
+    <ion-content>
+       <img src="http://image.tmdb.org/t/p/w500{{movie.backdrop_path}}" />
+       <ul>
+           <li class="item">
+               <strong>Release date</strong>
+               {{movie.release_date | date: 'yyyy'}}
+           </li>
+           <li class="item">
+               <strong>Rating</strong>
+               {{movie.vote_average}}
+           </li>
+           <li class="item item-body">
+               {{movie.overview}}
+           </li>
+       </ul>
+    </ion-content>
+</ion-view>

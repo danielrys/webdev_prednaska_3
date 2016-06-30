@@ -1,21 +1,30 @@
-app.factory('MoviesService', function ($rootScope, $http, $state, $ionicLoading) {
+app.factory('MoviesService', function ($rootScope, $http, $state, $ionicLoading, APP_CONFIG) {
     return new (function () {
         var service = this;
         service.data = {};
-        service.data.movies = [
-            {
-                "title": "The Hateful Eight",
-                "release_date": "2015-12-25",
-                "vote_average": "7.12",
-                "vote_count": "497"
+        service.data.movies = [];
+        
+        service.getMovies = function () {
+            var req = {
+                method: "GET",
+                url: APP_CONFIG.getApiUrl("popular")
+            };
 
-            },
-            {
-                "title": "The Revenant",
-                "release_date": "2015-12-25",
-                "vote_average": "7.2",
-                "vote_count": "507"
-            },
-        ]
-    })();
+            $http(req).success(function (response) {
+                [].push.apply(service.data.movies, response.results);
+            }).error(function (data, status, headers, config) {
+                console.log("error", data, status, headers, config);
+            });
+        };
+
+        service.getMovieById = function (id) {
+            var selectedMovie = {};
+            angular.forEach(service.data.movies, function (movie) {
+                if (movie.id == id) selectedMovie = movie;
+            });
+            return selectedMovie;
+        };
+
+        service.getMovies();
+    });
 });
