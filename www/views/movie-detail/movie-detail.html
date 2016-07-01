@@ -13,6 +13,15 @@
            <li class="item item-body">
                {{movie.overview}}
            </li>
+           <li class="item">
+            <button class="button button-block" ng-click="toggleWatched(movie.id)" ng-class="{
+            'button-positive': !isMovieWatched(),
+            'button-assertive': isMovieWatched()
+            }">
+                <span ng-if="!isMovieWatched()">Mark as watched</span>
+                <span ng-if="isMovieWatched()">Unmark as watched</span>
+            </button>
+            </li>
        </ul>
     </ion-content>
 </ion-view>
